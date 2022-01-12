@@ -7,10 +7,15 @@ import { Tabs } from "antd";
 const { TabPane } = Tabs;
 
 function Adminscreen() {
-  const user = JSON.parse(localStorage.getItem("currentUser")).isAdmin;
-  if (!user) {
+  if (!JSON.parse(localStorage.getItem("currentUser"))) {
+    window.location.href = "/login";
+  }
+
+  if (!JSON.parse(localStorage.getItem("currentUser")).isAdmin) {
     window.location.href = "/home";
   }
+
+  //if(JSON.parse(loca))
   return (
     <div className="ml-3 mr-3 mt-3 mb-3 bs">
       <h2 className="text-center" style={{ fontSize: "30px" }}>

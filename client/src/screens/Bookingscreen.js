@@ -14,6 +14,10 @@ AOS.init({
 });
 
 function Bookingscreen() {
+  if (!JSON.parse(localStorage.getItem("currentUser"))) {
+    window.location.href = "/login";
+  }
+
   const [loading, setloading] = useState(true);
   const [error, seterror] = useState(false);
   const [room, setroom] = useState();
@@ -27,12 +31,6 @@ function Bookingscreen() {
   const [totalamount, settotalamount] = useState();
 
   useEffect(() => {
-    const user = JSON.parse(localStorage.getItem("currentUser"));
-
-    if (!user) {
-      window.location.href = "/login";
-    }
-
     async function getRoomDetailsById() {
       try {
         setloading(true);
@@ -66,8 +64,12 @@ function Bookingscreen() {
       setloading(true);
       const data = axios.post("/bookings/bookroom", bookingDetails);
       setloading(false);
-      Swal.fire("Congratulations!", "Your Room Booked Successfully", "success").then(result=>{
-        window.location.href='/profile';
+      Swal.fire(
+        "Congratulations!",
+        "Your Room Booked Successfully",
+        "success"
+      ).then((result) => {
+        window.location.href = "/profile";
       });
     } catch (error) {
       setloading(false);

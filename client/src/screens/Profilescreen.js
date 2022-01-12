@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import Loader from "react-spinners/HashLoader";
+import Loader from "../components/Loader";
 import Error from "../components/Error";
 import { Tabs, Tag } from "antd";
 import Swal from "sweetalert2";
@@ -8,11 +8,9 @@ const { TabPane } = Tabs;
 
 function Profilescreen() {
   const user = JSON.parse(localStorage.getItem("currentUser"));
-  useEffect(() => {
-    if (!user) {
-      window.location.reload = "/login";
-    }
-  }, [user]);
+  if (!user) {
+    window.location.href = "/login";
+  }
 
   return (
     <div className="ml-3 mt-3">
@@ -107,7 +105,7 @@ export function MyBookings() {
                   </p>
                   <p>
                     <b>Status</b>:&nbsp;
-                     {booking.status === "booked" ? (
+                    {booking.status === "booked" ? (
                       <Tag color="green"> CONFIRMED</Tag>
                     ) : (
                       <Tag color="red"> CANCELLED</Tag>
