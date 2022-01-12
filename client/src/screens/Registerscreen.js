@@ -53,7 +53,7 @@ function Registerscreen() {
     <div>
       <h1 className="lgloader">{loading && <Loader />}</h1>
       <div className="row justify-content-center mt-5">
-        <div className="col-sm-5">
+        <div className="col-sm-5 mr-3 ml-3">
           {error && <Error message= "Registration Error!" />}
           {success && <Success message="Registration success!" />}
           <div className="bs">
