@@ -33,7 +33,7 @@ function Rooms() {
             <Loader />
           </p>
         )}
-        <table className="table table-bordered table-dark">
+        <table className="table table-bordered table-dark table-responsive">
           <thead className="bs">
             <tr>
               <th>Room Id</th>
