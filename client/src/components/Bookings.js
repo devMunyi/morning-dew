@@ -33,7 +33,7 @@ function Bookings() {
             <Loader />
           </p>
         )}
-        <table className="table table-bordered table-dark">
+        <table className="table table-bordered table-dark table-responsive">
           <thead className="bs">
             <tr>
               <th>Bookind Id</th>
