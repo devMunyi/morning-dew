@@ -13,8 +13,8 @@ function Homescreen() {
   const [loading, setloading] = useState(true);
   const [error, seterror] = useState(false);
 
-  const [fromdate, setfromdate] = useState();
-  const [todate, settodate] = useState();
+  const [cfromdate, setcfromdate] = useState();
+  const [ctodate, setctodate] = useState();
   const [duplicaterooms, setduplicaterooms] = useState();
 
   const [searchkey, setsearchkey] = useState("");
@@ -39,33 +39,42 @@ function Homescreen() {
   }, []);
 
   function filterByDate(dates) {
-    setfromdate(moment(dates[0]).format("DD-MM-YYYY"));
-    settodate(moment(dates[1]).format("DD-MM-YYYY"));
+    setcfromdate(moment(dates[0], "DD-MM-YYYY").format("DD-MM-YYYY"));
+    setctodate(moment(dates[1], "DD-MM-YYYY").format("DD-MM-YYYY"));
+
+    console.log(
+      "Selected from date is : ",
+      moment(dates[0], "DD-MM-YYYY").format("DD-MM-YYYY")
+    );
+    console.log(
+      "Selected to date is : ",
+      moment(dates[1], "DD-MM-YYYY").format("DD-MM-YYYY")
+    );
 
     var temprooms = [];
     var availability = false;
-    for (var room of duplicaterooms) {
+    for (const room of duplicaterooms) {
       if (room.currentbookings.length > 0) {
-        for (var booking of room.currentbookings) {
+        for (const booking of room.currentbookings) {
+          console.log(booking.fromdate);
+          console.log(booking.todate);
           if (
-            !moment(moment(dates[0]).format("DD-MM-YYYY")).isBetween(
-              booking.fromdate,
-              booking.todate
-            ) &&
-            !moment(moment(dates[1]).format("DD-MM-YYYY")).isBetween(
-              booking.fromdate,
-              booking.todate
-            ) &&
-            !moment(moment(dates[0]).format("DD-MM-YYYY")).isSame(
+            !moment(
+              moment(dates[0], "DD-MM-YYYY").format("DD-MM-YYYY")
+            ).isBetween(booking.fromdate, booking.todate) &&
+            !moment(
+              moment(dates[1], "DD-MM-YYYY").format("DD-MM-YYYY")
+            ).isBetween(booking.fromdate, booking.todate) &&
+            !moment(moment(dates[0], "DD-MM-YYYY").format("DD-MM-YYYY")).isSame(
               booking.fromdate
             ) &&
-            !moment(moment(dates[0]).format("DD-MM-YYYY")).isSame(
+            !moment(moment(dates[0], "DD-MM-YYYY").format("DD-MM-YYYY")).isSame(
               booking.todate
             ) &&
-            !moment(moment(dates[1]).format("DD-MM-YYYY")).isSame(
+            !moment(moment(dates[1], "DD-MM-YYYY").format("DD-MM-YYYY")).isSame(
               booking.fromdate
             ) &&
-            !moment(moment(dates[1]).format("DD-MM-YYYY")).isSame(
+            !moment(moment(dates[1], "DD-MM-YYYY").format("DD-MM-YYYY")).isSame(
               booking.todate
             )
           ) {
@@ -143,7 +152,7 @@ function Homescreen() {
           rooms.map((room) => {
             return (
               <div key={room._id.toString()} className="col-md-9 mt-2">
-                <Room room={room} fromdate={fromdate} todate={todate} />
+                <Room room={room} fromdate={cfromdate} todate={ctodate} />
               </div>
             );
           })

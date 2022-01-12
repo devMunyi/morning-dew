@@ -9,7 +9,7 @@ AOS.init({
 function Landingscreen() {
   return (
     <div className="row landing justify-content-center">
-      <div className="col-md-9 my-auto text-center" style={{borderRight: '8px solid white'}}>
+      <div className="col-sm-9 my-auto text-center" style={{borderRight: '8px solid white'}}>
         <h2 data-aos="zoom-in" style={{ color: "white", fontSize: "100px" }}>Morning Dew</h2>
         <h1 data-aos="zoom-out" style={{ color: "white" }}>"There is only one boss. The Guest".</h1>
         <Link to={`/home`}>
